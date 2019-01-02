@@ -1,0 +1,78 @@
+body {
+	color: #666;
+}
+.section-header {
+	text-transform: uppercase;
+	color: #666;
+}
+.hr-heavy {
+    display: block;
+    height: 2px;
+    border: 0;
+    border-top: 2px solid #00a2ff;
+    margin: 1em 0;
+    padding: 0; 
+}
+.hr-light {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 1em 0;
+    padding: 0; 
+}
+a:link {
+	color: #ef3131;
+}
+a:visited {
+	color: #ef3131;
+}
+a:active {
+	color: #ef3131;	
+}
+a:hover {
+	color: #ef3131;
+
+}
+h2 {
+	margin: 1em;
+}
+label {
+	font-size: 1.2em;
+	font-weight: 500;
+	margin-top: 1em;
+	margin-bottom: 0;
+	display: block;
+}
+small {
+	margin-top: -0.5em;
+	margin-bottom: 0em;
+}
+.custom-control-label {
+	font-weight: 400;
+	margin-top: 0.1em;
+}
+.questions img {
+	margin: 0 auto;
+	display: block;
+}
+.checkbox {
+	display: none;
+}
+.radio {
+	display: none;
+}
+.option-label {
+	font-weight: 300;
+	margin-top: 0.2em;
+	margin-bottom: 0.2em;
+	font-size: 0.8em;
+}
+.inner-row {
+	margin-top: 0;
+}
+.text-muted {
+	color: #BBB!important;
+	font-size: 1em;
+	margin: 0;
+}

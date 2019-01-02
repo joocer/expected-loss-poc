@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en" ng-app="RiskModelApp">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+	<div class="container" ng-controller="RiskModelController as riskmodel">
+		<br />
+		<h1>Generic Risk Model</h1>
+		<br />
+		<div id="distribution-plot" item-width="100%" item-height="450px"></div>
+		<div class="row">
+			<div class="col-sm-6">
+				<h3>Risk Factors</h3>
+				<form>
+
+					<div class="form-group">
+						<label for="archetype">Application Type: {{archetype}}</label>
+						<select id="archetype" class="form-control" ng-model="archetype" ng-change="riskmodel.redraw()">
+							<option ng-repeat="c in riskmodel.FrequencyMatrix">{{c.key}}</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" id="chkusers" ng-model="users" ng-change="riskmodel.redraw()">
+							<label class="form-check-label" for="chkusers">
+								The system authenticates customer and/or administrators
+							</label>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" id="chkdata" ng-model="data" ng-change="riskmodel.redraw()">
+							<label class="form-check-label" for="chkdata">
+								The system processes CIA, PII or payment information
+							</label>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" id="chkservice" ng-model="service" ng-change="riskmodel.redraw()">
+							<label class="form-check-label" for="chkservice">
+								The system is Internet facing or support a CBP
+							</label>
+						</div>
+					</div>
+
+					<h3>Impact</h3>
+					<div class="form-group">
+						<label for="impact">Impact:</label>
+						<select id="impact" class="form-control" ng-model="impact" ng-change="riskmodel.redraw()">
+							<option ng-repeat="c in riskmodel.ImpactValues">{{c.description}}</option>
+						</select>
+					</div>
+				</form>
+
+			</div>
+			<div class="col-sm-6">
+				<h3>Expected Loss</h3>
+				<div>£{{riskmodel.ExpectedLoss | number : 0}} per year</div>
+				<hr />
+				<h3>Risk Matrix</h3>
+
+				<table class="table table-sm">
+					<thead>
+						<tr>
+							<th></th>
+							<th scope="col">Confidentiality</th>
+							<th scope="col">Integrity</th>
+							<th scope="col">Availability</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">Users</th>
+							<td>{{riskmodel.RiskMatrix[0].confidentiality.frequency * 100}}% {{riskmodel.RiskMatrix[0].confidentiality.impact}}</td>
+							<td>{{riskmodel.RiskMatrix[0].integrity.frequency * 100}}% {{riskmodel.RiskMatrix[0].integrity.impact}}</td>
+							<td>{{riskmodel.RiskMatrix[0].availability.frequency * 100}}% {{riskmodel.RiskMatrix[0].availability.impact}}</td>
+						</tr>
+						<tr>
+							<th scope="row">Data</th>
+							<td>{{riskmodel.RiskMatrix[1].confidentiality.frequency * 100}}% {{riskmodel.RiskMatrix[1].confidentiality.impact}}</td>
+							<td>{{riskmodel.RiskMatrix[1].integrity.frequency * 100}}% {{riskmodel.RiskMatrix[1].integrity.impact}}</td>
+							<td>{{riskmodel.RiskMatrix[1].availability.frequency * 100}}% {{riskmodel.RiskMatrix[1].availability.impact}}</td>
+						</tr>
+						<tr>
+							<th scope="row">Service</th>
+							<td>{{riskmodel.RiskMatrix[2].confidentiality.frequency * 100}}% {{riskmodel.RiskMatrix[2].confidentiality.impact}}</td>
+							<td>{{riskmodel.RiskMatrix[2].integrity.frequency * 100}}% {{riskmodel.RiskMatrix[2].integrity.impact}}</td>
+							<td>{{riskmodel.RiskMatrix[2].availability.frequency * 100}}% {{riskmodel.RiskMatrix[2].availability.impact}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+
+	</div>
+
+	<!-- Optional JavaScript -->
+	<script src="js/jquery-3.2.1.slim.min.js"></script>
+	<script src="js/grm.js"></script>
+	<script src="js/plotly.min.js"></script>
+	<script src="js/jstat.js"></script>
+	<script src="js/angular.min.js"></script>
+</body>
+
+</html>
